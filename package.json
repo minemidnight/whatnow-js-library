@@ -1,0 +1,26 @@
+{
+  "name": "whatnow-js-library",
+  "version": "1.0.0",
+  "description": "Simple library to interact with the WhatNow API",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minemidnight/whatnow-js-library.git"
+  },
+  "keywords": [
+    "api",
+    "whatnow"
+  ],
+  "author": "minemidnight",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/minemidnight/whatnow-js-library/issues"
+  },
+  "homepage": "https://github.com/minemidnight/whatnow-js-library#readme",
+  "dependencies": {
+    "superagent": "^3.5.2"
+  }
+}
