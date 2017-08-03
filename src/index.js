@@ -2,7 +2,7 @@ const baseURL = "https://whatnowapp.net/api/";
 const superagent = require("superagent");
 
 module.exports = {
-	parties: async token => {
+	parties: token => {
 		if(!token) throw new Error("No token provided");
 
 		return {
@@ -76,7 +76,7 @@ module.exports = {
 			}
 		};
 	},
-	users: async token => {
+	users: token => {
 		if(!token) throw new Error("No token provided");
 
 		return {
