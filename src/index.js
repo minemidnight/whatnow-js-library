@@ -10,10 +10,10 @@ module.exports = {
 				if(typeof options === "object") {
 					let data = Object.assign({ limit: 20, offset: 0, minprice: 0, maxprice: 100, premium: false }, options);
 					try {
-						let { body } = await superagent.get(`${baseURL}/parties`)
+						let { body: { parties } } = await superagent.get(`${baseURL}/parties`)
 							.set("Authorization", token)
 							.query(data);
-						return body;
+						return parties;
 					} catch(err) {
 						let error = new Error(err.response.message || err.message);
 						error.responseCode = err.status;
@@ -24,9 +24,9 @@ module.exports = {
 					let id = options;
 
 					try {
-						let { body } = await superagent.get(`${baseURL}/parties/${id}`)
+						let { body: { party } } = await superagent.get(`${baseURL}/parties/${id}`)
 							.set("Authorization", token);
-						return body;
+						return party;
 					} catch(err) {
 						let error = new Error(err.response.message || err.message);
 						error.responseCode = err.status;
@@ -38,10 +38,10 @@ module.exports = {
 			create: async options => {
 				let data = Object.assign({ premium: false, price: 0 }, options);
 				try {
-					let { body } = await superagent.post(`${baseURL}/parties`)
+					let { body: { party } } = await superagent.post(`${baseURL}/parties`)
 						.set("Authorization", token)
 						.send(data);
-					return body;
+					return party;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
@@ -51,10 +51,10 @@ module.exports = {
 			},
 			modify: async (id, data) => {
 				try {
-					let { body } = await superagent.patch(`${baseURL}/parties/${id}`)
+					let { body: { party } } = await superagent.patch(`${baseURL}/parties/${id}`)
 						.set("Authorization", token)
 						.send(data);
-					return body;
+					return party;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
@@ -82,9 +82,9 @@ module.exports = {
 		return {
 			get: async id => {
 				try {
-					let { body } = await superagent.get(`${baseURL}/users/${id}`)
+					let { body: { user } } = await superagent.get(`${baseURL}/users/${id}`)
 						.set("Authorization", token);
-					return body;
+					return user;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
@@ -97,7 +97,10 @@ module.exports = {
 					let { body } = await superagent.patch(`${baseURL}/users/${id}`)
 						.set("Authorization", token)
 						.send(data);
-					return body;
+
+					if(body.token) return body.token;
+					else if(body.otpURL) return { otpURL: body.otpURL, user: body.user };
+					else return body.user;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
@@ -119,9 +122,9 @@ module.exports = {
 			},
 			getParties: async id => {
 				try {
-					let { body } = await superagent.get(`${baseURL}/users/${id}/parties`)
+					let { body: { parties } } = await superagent.get(`${baseURL}/users/${id}/parties`)
 						.set("Authorization", token);
-					return body;
+					return parties;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
