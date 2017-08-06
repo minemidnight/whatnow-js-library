@@ -1,6 +1,6 @@
 {
   "name": "whatnow-js-library",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple library to interact with the WhatNow API",
   "main": "src/index.js",
   "scripts": {

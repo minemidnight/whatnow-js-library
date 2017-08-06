@@ -6,13 +6,13 @@ module.exports = {
 		if(!token) throw new Error("No token provided");
 
 		return {
-			get: async options => {
+			get: async (options = {}) => {
 				if(typeof options === "object") {
 					let data = Object.assign({ limit: 20, offset: 0, minprice: 0, maxprice: 100, premium: false }, options);
 					try {
 						let { body: { parties } } = await superagent.get(`${baseURL}/parties`)
 							.set("Authorization", token)
-							.query(data);
+							.send(data);
 						return parties;
 					} catch(err) {
 						let error = new Error(err.response.message || err.message);
@@ -80,7 +80,7 @@ module.exports = {
 		if(!token) throw new Error("No token provided");
 
 		return {
-			get: async id => {
+			get: async (id = "@me") => {
 				try {
 					let { body: { user } } = await superagent.get(`${baseURL}/users/${id}`)
 						.set("Authorization", token);
@@ -92,7 +92,7 @@ module.exports = {
 					throw error;
 				}
 			},
-			modify: async (id, data) => {
+			modify: async (id = "@me", data) => {
 				try {
 					let { body } = await superagent.patch(`${baseURL}/users/${id}`)
 						.set("Authorization", token)
@@ -108,7 +108,7 @@ module.exports = {
 					throw error;
 				}
 			},
-			delete: async id => {
+			delete: async (id = "@me") => {
 				try {
 					let resp = await superagent.delete(`${baseURL}/users/${id}`)
 						.set("Authorization", token);
@@ -120,11 +120,37 @@ module.exports = {
 					throw error;
 				}
 			},
-			getParties: async id => {
+			getParties: async (id = "@me") => {
 				try {
 					let { body: { parties } } = await superagent.get(`${baseURL}/users/${id}/parties`)
 						.set("Authorization", token);
 					return parties;
+				} catch(err) {
+					let error = new Error(err.response.message || err.message);
+					error.responseCode = err.status;
+					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					throw error;
+				}
+			},
+			verify: async id => {
+				let key = token;
+
+				try {
+					let { body: { user } } = await superagent.post(`${baseURL}/users/${id}/verify`)
+						.send({ key });
+					return user;
+				} catch(err) {
+					let error = new Error(err.response.message || err.message);
+					error.responseCode = err.status;
+					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					throw error;
+				}
+			},
+			resend: async (id = "@me") => {
+				try {
+					let resp = await superagent.post(`${baseURL}/users/${id}/resend`)
+						.set("Authorization", token);
+					return true;
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
