@@ -17,7 +17,7 @@ module.exports = {
 					} catch(err) {
 						let error = new Error(err.response.message || err.message);
 						error.responseCode = err.status;
-						if(err.response && err.response.code) error.jsonCode = err.response.code;
+						if(err.response) error.jsonCode = err.response.body.code;
 						throw error;
 					}
 				} else {
@@ -30,7 +30,7 @@ module.exports = {
 					} catch(err) {
 						let error = new Error(err.response.message || err.message);
 						error.responseCode = err.status;
-						if(err.response && err.response.code) error.jsonCode = err.response.code;
+						if(err.response) error.jsonCode = err.response.body.code;
 						throw error;
 					}
 				}
@@ -45,7 +45,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -58,7 +58,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -70,7 +70,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			}
@@ -88,7 +88,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -104,7 +104,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -116,7 +116,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -128,7 +128,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -142,7 +142,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			},
@@ -154,7 +154,7 @@ module.exports = {
 				} catch(err) {
 					let error = new Error(err.response.message || err.message);
 					error.responseCode = err.status;
-					if(err.response && err.response.code) error.jsonCode = err.response.code;
+					if(err.response) error.jsonCode = err.response.body.code;
 					throw error;
 				}
 			}

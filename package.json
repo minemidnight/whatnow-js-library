@@ -1,6 +1,6 @@
 {
   "name": "whatnow-js-library",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple library to interact with the WhatNow API",
   "main": "src/index.js",
   "scripts": {
@@ -22,8 +22,5 @@
   "homepage": "https://github.com/minemidnight/whatnow-js-library#readme",
   "dependencies": {
     "superagent": "^3.5.2"
-  },
-  "devDependencies": {
-    "webpack": "^3.4.1"
   }
 }
